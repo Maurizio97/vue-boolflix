@@ -6,9 +6,9 @@
           </div>
       </div> -->
       <ul>
-          <!-- <li v-for="film, i in listFilm" :key="i">
-              {{film.result.original_title}}
-          </li> -->
+          <li v-for="film, i in listFilm" :key="i">
+              {{film.original_title}}
+          </li>
       </ul>
   </main>
 </template>
@@ -19,7 +19,7 @@ export default {
   name: 'MyMain',
   data(){
       return {
-          listFilm: [],
+          listFilm: {},
           apiUrl:"https://api.themoviedb.org/3/search/movie?api_key=bd6af5f27de039c66efea1f8e2b13067",
           query:"hitman",
       }
@@ -33,10 +33,9 @@ export default {
     // https://api.themoviedb.org/3/search/movie?api_key=bd6af5f27de039c66efea1f8e2b13067&query=hitman
       getArray(){
           Axios
-        // .get("https://api.themoviedb.org/3/search/movie?api_key=bd6af5f27de039c66efea1f8e2b13067&query=hitman")
           .get(`${this.apiUrl}&query=${this.query}`)
           .then((res) => {
-              this.listFilm = res;
+              this.listFilm = res.data.results;
               console.log("axios mi torna:",this.listFilm);
             })
       }

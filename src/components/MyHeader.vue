@@ -1,7 +1,7 @@
 <template>
   <header>
       <input type="text" placeholder="Search">
-      <button>Search</button>
+      <button @click="$emit('search', $event.target.value)" >Search</button>
   </header>
 </template>
 
