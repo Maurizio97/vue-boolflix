@@ -1,6 +1,6 @@
 <template>
   <main>
-      <div class="container-card" v-for="film, i in details" :key="i">
+      <div class="container-card" v-for="film, i in listFilm" :key="i">
           <div class="card">
             <div> Titolo: {{film.title}}</div>
             <div>Titolo Originale: {{film.original_title}}</div>
@@ -8,14 +8,14 @@
             <div>Voto: {{film.vote_average}}</div>
           </div>
       </div>
-      <!-- <ul>
-          <li >
-            <div>{{film.title}}</div>
-            <div>{{film.original_title}}</div>
-            <div>{{film.original_language}}</div>
-            <div>{{film.vote_average}}</div>
-          </li>
-      </ul> -->
+      <div class="container-card" v-for="tv in listTv" :key="tv.id">
+          <div class="card">
+            <div> Titolo: {{tv.name}}</div>
+            <div>Titolo Originale: {{tv.original_name}}</div>
+            <div>Lingua: {{tv.original_language}}</div>
+            <div>Voto: {{tv.vote_average}}</div>
+          </div>
+      </div>
   </main>
 </template>
 
@@ -24,7 +24,8 @@
 export default {
   name: 'MyMain',
   props: {
-      details:Array
+      listFilm:Array,
+      listTv:Array,
   },
 }
 </script>
