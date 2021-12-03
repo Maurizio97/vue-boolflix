@@ -109,21 +109,31 @@ main {
   display: flex;
   flex-wrap: wrap;
 }
+
 .container-card {
   width: calc(100% / 3);
   margin: 20px 0;
   color: white;
 }
+
 .card {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  // height: 100%;
 
   .cover  {
     background-color: black;
     height: 500px;
+    cursor: pointer;
+
+    &:hover img {
+      display: none;
+    }
+
+    &:hover .container-info {
+      display: block;
+    }
   }
 
   .language img {
@@ -133,11 +143,19 @@ main {
 
 .container-info {
   display: none;
+  width: 342px;
 }
 
 .cover img {
   height: 100%;
 }
+
+// .cover:hover .container-info {
+//     display: block;
+// }
+.cover:hover img {
+    display: none;
+  }
 
 .cover-netflix {
   width: 342px;
@@ -147,7 +165,4 @@ main {
   color: yellow;
 }
 
-.none {
-  display: none;
-}
 </style>
