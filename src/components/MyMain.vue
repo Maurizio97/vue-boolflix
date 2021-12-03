@@ -58,6 +58,7 @@ export default {
     };
   },
   methods: {
+    // funzione per aggiungere le bandiere
     insertFlag(item) {
       if (item === "it") {
         return this.itFlag;
@@ -69,7 +70,8 @@ export default {
         return "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvUgkbNyXbD7bXamCmiGz2ZBAVbyaU_fvARQ&usqp=CAU";
       }
     },
-
+    
+    // funzione per aggiungere le stelle 
     starsVote(vote){
       for(let i = 0; i <= Math.floor(vote / 2); i++){
         this.arrayStar.push("https://www.pngall.com/wp-content/uploads/9/Golden-Star-PNG-Image-File.png")
