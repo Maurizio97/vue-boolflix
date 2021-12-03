@@ -4,8 +4,8 @@
     <div class="container-card" v-for="film in listFilm" :key="film.id">
       <div class="card">
         <div class="cover">
-          <!-- <img v-if="film.poster_path !== null" :src="coverUrl + film.poster_path" :alt="film.title" />
-          <img v-else class="cover-netflix" src="https://i.pinimg.com/564x/01/e1/35/01e135a5bcabe81ce279076de8dfbfd9.jpg" alt=""> -->
+          <img v-if="film.poster_path !== null" :src="coverUrl + film.poster_path" :alt="film.title" />
+          <img v-else class="cover-netflix" src="https://i.pinimg.com/564x/01/e1/35/01e135a5bcabe81ce279076de8dfbfd9.jpg" alt="">
           
           <!-- container info -->
           <div class="container-info">
@@ -15,8 +15,10 @@
 
             <!-- contenitore del voto -->
             <div>
-              <span v-for="star, i in arrayStar" :key="i" :class="i > (film.vote_average / 2) - 1? 'none': ''">
-                <i class="star" :class="star"></i>
+              Voto:
+              <span v-for="star, i in arrayStar" :key="i">
+                <i v-if="i > (film.vote_average / 2) - 1" class="far fa-star"></i>
+                <i v-else class="star" :class="star"></i>
               </span>
             </div>
             <!-- //contenitore del voto -->
@@ -42,8 +44,10 @@
 
             <!-- contenitore del voto -->
             <div>
-              <span v-for="star, i in arrayStar" :key="i" :class="i > (tv.vote_average / 2) - 1? 'none': ''">
-                <i class="star" :class="star"></i>
+              Voto:
+              <span v-for="star, i in arrayStar" :key="i" >
+                <i v-if="i > (tv.vote_average / 2) - 1" class="far fa-star"></i>
+                <i v-else class="star" :class="star"></i>
               </span>
             </div>
             <!-- //contenitore del voto -->
