@@ -13,6 +13,7 @@
             <div>Titolo Originale: {{ film.original_title }}</div>
             <div class="language">Lingua: <img :src="insertFlag(film.original_language)" /></div>
             <div>Voto: {{ Math.floor(film.vote_average / 2) }}</div>
+            <span><i class="fab fa-accessible-icon"></i></span>
           </div>
 
         </div>
@@ -31,7 +32,11 @@
             <div>Titolo: {{ tv.title }}</div>
             <div>Titolo Originale: {{ tv.original_title }}</div>
             <div class="language">Lingua: <img :src="insertFlag(tv.original_language)" /></div>
-            <div>Voto: {{ tv.vote_average }} <span v-for="star, i in starsVote(tv.vote_average)" :key="`star${i}`"><img :src="star" :alt="key"></span></div>
+            <div>Voto: {{ tv.vote_average }} 
+              <span v-for="star, i in starsVote(tv.vote_average)" :key="`star${i}`">
+                <img :src="star" :alt="key">
+              </span>
+            </div>
           </div>
 
         </div>
@@ -72,13 +77,20 @@ export default {
     },
 
     // funzione per aggiungere le stelle 
-    starsVote(vote){
-      for(let i = 0; i <= Math.floor(vote / 2); i++){
-        this.arrayStar.push("https://www.pngall.com/wp-content/uploads/9/Golden-Star-PNG-Image-File.png")
-      }
-      // return this.arrayStar
-    }
+    // starsVote(vote){
+    //   for(let i = 0; i <= Math.floor(vote / 2); i++){
+    //     this.arrayStar.push("https://www.pngall.com/wp-content/uploads/9/Golden-Star-PNG-Image-File.png")
+    //   }
+    //   return this.arrayStar
+    // }
   },
+  // computed: {
+  //   starsVote(vote){
+  //     for(let i = 0; i <= Math.floor(vote / 2); i++){
+  //       return this.arrayStar.push("https://www.pngall.com/wp-content/uploads/9/Golden-Star-PNG-Image-File.png")
+  //     }
+  //   }
+  // }
 };
 </script>
 
