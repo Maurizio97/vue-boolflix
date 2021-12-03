@@ -12,8 +12,15 @@
             <div>Titolo: {{ film.title }}</div>
             <div>Titolo Originale: {{ film.original_title }}</div>
             <div class="language">Lingua: <img :src="insertFlag(film.original_language)" /></div>
-            <div>Voto: {{ Math.floor(film.vote_average / 2) }}</div>
-            <span><i class="fab fa-accessible-icon"></i></span>
+
+            <!-- contenitore del voto -->
+            <div>
+              <span v-for="star, i in arrayStar" :key="i" :class="i > (film.vote_average / 2) - 1? 'none': ''">
+                <i class="star" :class="star"></i>
+              </span>
+            </div>
+            <!-- //contenitore del voto -->
+
           </div>
 
         </div>
@@ -32,11 +39,14 @@
             <div>Titolo: {{ tv.title }}</div>
             <div>Titolo Originale: {{ tv.original_title }}</div>
             <div class="language">Lingua: <img :src="insertFlag(tv.original_language)" /></div>
-            <div>Voto: {{ tv.vote_average }} 
-              <span v-for="star, i in arrayStar" :key="i">
-                <img class="star" :class="i > Math.floor((tv.vote_average / 2) - 1)? 'none': ''" :src="star" :alt="i">
+
+            <!-- contenitore del voto -->
+            <div>
+              <span v-for="star, i in arrayStar" :key="i" :class="i > (tv.vote_average / 2) - 1? 'none': ''">
+                <i class="star" :class="star"></i>
               </span>
             </div>
+            <!-- //contenitore del voto -->
           </div>
 
         </div>
@@ -60,11 +70,11 @@ export default {
       frFlag: require("@/assets/fr_flag.png"),
       coverUrl: "http://image.tmdb.org/t/p/w342",
       arrayStar: [
-        "https://www.pngall.com/wp-content/uploads/9/Golden-Star-PNG-Image-File.png",
-        "https://www.pngall.com/wp-content/uploads/9/Golden-Star-PNG-Image-File.png",
-        "https://www.pngall.com/wp-content/uploads/9/Golden-Star-PNG-Image-File.png",
-        "https://www.pngall.com/wp-content/uploads/9/Golden-Star-PNG-Image-File.png",
-        "https://www.pngall.com/wp-content/uploads/9/Golden-Star-PNG-Image-File.png",
+        'fas fa-star',
+        'fas fa-star',
+        'fas fa-star',
+        'fas fa-star',
+        'fas fa-star',
       ]
     };
   },
@@ -81,22 +91,7 @@ export default {
         return "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvUgkbNyXbD7bXamCmiGz2ZBAVbyaU_fvARQ&usqp=CAU";
       }
     },
-
-    // funzione per aggiungere le stelle 
-    // starsVote(vote){
-    //   for(let i = 0; i <= Math.floor(vote / 2); i++){
-    //     this.arrayStar.push("https://www.pngall.com/wp-content/uploads/9/Golden-Star-PNG-Image-File.png")
-    //   }
-    //   return this.arrayStar
-    // }
   },
-  // computed: {
-  //   starsVoteComp(vote) {
-  //     starsVote(vote)
-  //     return  this.arrayStar
-  //   }
-
-  // },
 };
 </script>
 
@@ -147,7 +142,7 @@ main {
 }
 
 .star {
-  height: 10px;
+  color: yellow;
 }
 
 .none {
