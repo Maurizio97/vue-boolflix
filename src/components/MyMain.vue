@@ -1,85 +1,129 @@
 <template>
   <main>
     <!-- film -->
-      <div class="container-card" v-for="film in listFilm" :key="film.id">
-          <div class="card">
-            <div> Titolo: {{film.title}}</div>
-            <div>Titolo Originale: {{film.original_title}}</div>
-            <div>Lingua: <img :src="insertFlag(film.original_language)"></div>
-            <div>Voto: {{film.vote_average}}</div>
+    <div class="container-card" v-for="film in listFilm" :key="film.id">
+      <div class="card">
+        <div class="cover">
+          <!-- <img v-if="film.poster_path !== null" :src="coverUrl + film.poster_path" :alt="film.title" />
+          <img v-else class="cover-netflix" src="https://i.pinimg.com/564x/01/e1/35/01e135a5bcabe81ce279076de8dfbfd9.jpg" alt=""> -->
+          
+          <!-- container info -->
+          <div class="container-info">
+            <div>Titolo: {{ film.title }}</div>
+            <div>Titolo Originale: {{ film.original_title }}</div>
+            <div class="language">Lingua: <img :src="insertFlag(film.original_language)" /></div>
+            <div>Voto: {{ film.vote_average }}</div>
           </div>
+
+        </div>
       </div>
-      <!-- serie tv -->
-      <div class="container-card" v-for="tv in listTv" :key="tv.id">
-          <div class="card">
-            <div> Titolo: {{tv.name}}</div>
-            <div>Titolo Originale: {{tv.original_name}}</div>
-            <div>Lingua: <img :src="insertFlag(tv.original_language)"></div>
-            <div>Voto: {{tv.vote_average}}</div>
+    </div>
+    <!-- serie tv -->
+    <!-- poster_path -->
+    <div class="container-card" v-for="tv in listTv" :key="tv.id">
+      <div class="card">
+        <div class="cover">
+          <img v-if="tv.poster_path !== null" :src="coverUrl + tv.poster_path" :alt="tv.title" />
+          <img v-else class="cover-netflix" src="https://i.pinimg.com/564x/01/e1/35/01e135a5bcabe81ce279076de8dfbfd9.jpg" alt="">
+          
+          <!-- container info -->
+          <div class="container-info">
+            <div>Titolo: {{ tv.title }}</div>
+            <div>Titolo Originale: {{ tv.original_title }}</div>
+            <div class="language">Lingua: <img :src="insertFlag(tv.original_language)" /></div>
+            <div>Voto: {{ tv.vote_average }} <span v-for="star, i in starsVote(tv.vote_average)" :key="`star${i}`"><img :src="star" :alt="key"></span></div>
           </div>
+
+        </div>
       </div>
+    </div>
   </main>
 </template>
 
 <script>
 // import Axios from 'axios'
 export default {
-  name: 'MyMain',
+  name: "MyMain",
   props: {
-      listFilm:Array,
-      listTv:Array,
+    listFilm: Array,
+    listTv: Array,
   },
-  data(){
+  data() {
     return {
       itFlag: require("@/assets/it_flag.png"),
       enFlag: require("@/assets/en_flag.png"),
       frFlag: require("@/assets/fr_flag.png"),
-    }
+      coverUrl: "http://image.tmdb.org/t/p/w342",
+      arrayStar: []
+    };
   },
   methods: {
-    insertFlag(item){
-      if(item === "it"){
-        return this.itFlag
-      } else if (item === "en"){
-        return this.enFlag
-      } else if (item === "fr"){
-        return this.frFlag
+    insertFlag(item) {
+      if (item === "it") {
+        return this.itFlag;
+      } else if (item === "en") {
+        return this.enFlag;
+      } else if (item === "fr") {
+        return this.frFlag;
       } else {
-        return "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvUgkbNyXbD7bXamCmiGz2ZBAVbyaU_fvARQ&usqp=CAU"
+        return "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvUgkbNyXbD7bXamCmiGz2ZBAVbyaU_fvARQ&usqp=CAU";
       }
+    },
+
+    starsVote(vote){
+      for(let i = 0; i <= Math.floor(vote / 2); i++){
+        this.arrayStar.push("https://www.pngall.com/wp-content/uploads/9/Golden-Star-PNG-Image-File.png")
+      }
+      // return this.arrayStar
     }
-  }
-}
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-    main {
-        margin: 20px auto;
-        width: 70%;
-        display: flex;
-        flex-wrap: wrap;
-    }
-    .container-card {
-        padding: 20px;
-        // debug
-        height: 200px;
-        width: 20%;
-        background-color: #2c3e50;
-        border: 1px solid black;
-        color: black;
+main {
+  display: flex;
+  align-items: stretch;
+  margin: 20px auto;
+  width: 70%;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: grey;
+}
+.container-card {
+  // padding: 20px;
+  // debug
+  // height: 200px;
+  width: calc(100% / 3);
+  margin-bottom: 20px;
+  // background-color: #2c3e50;
+  // border: 1px solid black;
+  color: black;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 
-        
-    }
-    .card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
+  .language img {
+    height: 10px;
+  }
+}
 
-            img {
-              height: 10px;
-            }
-        }
+.container-info {
+  // display: none;
+}
+
+.cover img {
+  height: 500px;
+}
+
+.cover-netflix {
+  width: 342px;
+  height: 100%;
+}
+
 </style>
