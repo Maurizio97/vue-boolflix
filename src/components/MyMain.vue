@@ -24,7 +24,7 @@
     <div class="container-card" v-for="tv in listTv" :key="tv.id">
       <div class="card">
         <div class="cover">
-          <img v-if="tv.poster_path !== null" :src="coverUrl + tv.poster_path" :alt="tv.title" />
+          <img class="cover-img" v-if="tv.poster_path !== null" :src="coverUrl + tv.poster_path" :alt="tv.title" />
           <img v-else class="cover-netflix" src="https://i.pinimg.com/564x/01/e1/35/01e135a5bcabe81ce279076de8dfbfd9.jpg" alt="">
           
           <!-- container info -->
@@ -33,8 +33,8 @@
             <div>Titolo Originale: {{ tv.original_title }}</div>
             <div class="language">Lingua: <img :src="insertFlag(tv.original_language)" /></div>
             <div>Voto: {{ tv.vote_average }} 
-              <span v-for="star, i in starsVote(tv.vote_average)" :key="`star${i}`">
-                <img :src="star" :alt="key">
+              <span v-for="star, i in arrayStar" :key="i">
+                <img class="star" :class="i > Math.floor((tv.vote_average / 2) - 1)? 'none': ''" :src="star" :alt="i">
               </span>
             </div>
           </div>
@@ -59,7 +59,13 @@ export default {
       enFlag: require("@/assets/en_flag.png"),
       frFlag: require("@/assets/fr_flag.png"),
       coverUrl: "http://image.tmdb.org/t/p/w342",
-      arrayStar: []
+      arrayStar: [
+        "https://www.pngall.com/wp-content/uploads/9/Golden-Star-PNG-Image-File.png",
+        "https://www.pngall.com/wp-content/uploads/9/Golden-Star-PNG-Image-File.png",
+        "https://www.pngall.com/wp-content/uploads/9/Golden-Star-PNG-Image-File.png",
+        "https://www.pngall.com/wp-content/uploads/9/Golden-Star-PNG-Image-File.png",
+        "https://www.pngall.com/wp-content/uploads/9/Golden-Star-PNG-Image-File.png",
+      ]
     };
   },
   methods: {
@@ -85,12 +91,12 @@ export default {
     // }
   },
   // computed: {
-  //   starsVote(vote){
-  //     for(let i = 0; i <= Math.floor(vote / 2); i++){
-  //       return this.arrayStar.push("https://www.pngall.com/wp-content/uploads/9/Golden-Star-PNG-Image-File.png")
-  //     }
+  //   starsVoteComp(vote) {
+  //     starsVote(vote)
+  //     return  this.arrayStar
   //   }
-  // }
+
+  // },
 };
 </script>
 
@@ -131,7 +137,7 @@ main {
   // display: none;
 }
 
-.cover img {
+.cover-img {
   height: 500px;
 }
 
@@ -140,4 +146,11 @@ main {
   height: 100%;
 }
 
+.star {
+  height: 10px;
+}
+
+.none {
+  display: none;
+}
 </style>
