@@ -1,7 +1,11 @@
 <template>
   <div id="app">
-    <MyHeader @searchFilm="saveArrayFilms" @searchTv="saveArrayTv"/>
-    <MyMain :listFilm="ArrayFilmsFromSearch" :listTv="ArrayTvFromSearch"/>
+    <div id="bg-header">
+      <MyHeader @searchFilm="saveArrayFilms" @searchTv="saveArrayTv"/>
+    </div>
+    <div id="bg-main">
+      <MyMain :listFilm="ArrayFilmsFromSearch" :listTv="ArrayTvFromSearch"/>    
+    </div>
   </div>
 </template>
 
@@ -40,12 +44,21 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  // margin-top: 60px;
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+#bg-main {
+  background-color: grey;
+  min-height: calc(100vh - 80px);
+}
+
+#bg-header {
+  background-color: black;
 }
 </style>

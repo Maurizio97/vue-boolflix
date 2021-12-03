@@ -104,28 +104,27 @@ export default {
 main {
   display: flex;
   align-items: stretch;
-  margin: 20px auto;
+  margin: 0px auto;
   width: 70%;
   display: flex;
   flex-wrap: wrap;
-  background-color: grey;
 }
 .container-card {
-  // padding: 20px;
-  // debug
-  // height: 200px;
   width: calc(100% / 3);
-  margin-bottom: 20px;
-  // background-color: #2c3e50;
-  // border: 1px solid black;
-  color: black;
+  margin: 20px 0;
+  color: white;
 }
 .card {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  // height: 100%;
+
+  .cover  {
+    background-color: black;
+    height: 500px;
+  }
 
   .language img {
     height: 10px;
@@ -133,16 +132,15 @@ main {
 }
 
 .container-info {
-  // display: none;
+  display: none;
 }
 
-.cover-img {
-  height: 500px;
+.cover img {
+  height: 100%;
 }
 
 .cover-netflix {
   width: 342px;
-  height: 100%;
 }
 
 .star {
