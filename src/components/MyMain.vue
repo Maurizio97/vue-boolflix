@@ -12,7 +12,7 @@
             <div>Titolo: {{ film.title }}</div>
             <div>Titolo Originale: {{ film.original_title }}</div>
             <div class="language">Lingua: <img :src="insertFlag(film.original_language)" /></div>
-            <div>Voto: {{ film.vote_average }}</div>
+            <div>Voto: {{ Math.floor(film.vote_average / 2) }}</div>
           </div>
 
         </div>
@@ -70,7 +70,7 @@ export default {
         return "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvUgkbNyXbD7bXamCmiGz2ZBAVbyaU_fvARQ&usqp=CAU";
       }
     },
-    
+
     // funzione per aggiungere le stelle 
     starsVote(vote){
       for(let i = 0; i <= Math.floor(vote / 2); i++){
