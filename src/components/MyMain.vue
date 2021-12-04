@@ -16,10 +16,6 @@
             <!-- contenitore del voto -->
             <div>
               Voto:
-              <!-- <span v-for="star, i in arrayStar" :key="i">
-                <i v-if="i > (film.vote_average / 2) - 1" class="far fa-star"></i>
-                <i v-else class="star" :class="star"></i>
-              </span> -->
               <span v-for="star, i in addStars(film)" :key="i">
                 <i class="star" :class="star"></i>
               </span>
@@ -48,9 +44,8 @@
             <!-- contenitore del voto -->
             <div>
               Voto:
-              <span v-for="star, i in arrayStar" :key="i" >
-                <i v-if="i > (tv.vote_average / 2) - 1" class="far fa-star"></i>
-                <i v-else class="star" :class="star"></i>
+              <span v-for="star, i in addStars(tv)" :key="i">
+                <i class="star" :class="star"></i>
               </span>
             </div>
             <!-- //contenitore del voto -->
@@ -76,13 +71,6 @@ export default {
       enFlag: require("@/assets/en_flag.png"),
       frFlag: require("@/assets/fr_flag.png"),
       coverUrl: "http://image.tmdb.org/t/p/w342",
-      // arrayStar: [
-      //   'fas fa-star',
-      //   'fas fa-star',
-      //   'fas fa-star',
-      //   'fas fa-star',
-      //   'fas fa-star',
-      // ]
     };
   },
   methods: {
