@@ -16,9 +16,12 @@
             <!-- contenitore del voto -->
             <div>
               Voto:
-              <span v-for="star, i in arrayStar" :key="i">
+              <!-- <span v-for="star, i in arrayStar" :key="i">
                 <i v-if="i > (film.vote_average / 2) - 1" class="far fa-star"></i>
                 <i v-else class="star" :class="star"></i>
+              </span> -->
+              <span v-for="star, i in addStars(film)" :key="i">
+                <i class="star" :class="star"></i>
               </span>
             </div>
             <!-- //contenitore del voto -->
@@ -73,13 +76,13 @@ export default {
       enFlag: require("@/assets/en_flag.png"),
       frFlag: require("@/assets/fr_flag.png"),
       coverUrl: "http://image.tmdb.org/t/p/w342",
-      arrayStar: [
-        'fas fa-star',
-        'fas fa-star',
-        'fas fa-star',
-        'fas fa-star',
-        'fas fa-star',
-      ]
+      // arrayStar: [
+      //   'fas fa-star',
+      //   'fas fa-star',
+      //   'fas fa-star',
+      //   'fas fa-star',
+      //   'fas fa-star',
+      // ]
     };
   },
   methods: {
@@ -95,6 +98,17 @@ export default {
         return "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvUgkbNyXbD7bXamCmiGz2ZBAVbyaU_fvARQ&usqp=CAU";
       }
     },
+    addStars(item){
+      let arrayStar = [];
+      for (let i = 0; i < 5; i++){
+        if (i > (item.vote_average / 2) - 1){
+          arrayStar.push("far fa-star");
+        } else {
+          arrayStar.push("fas fa-star");
+        }
+      }
+        return arrayStar
+    }
   },
 };
 </script>
