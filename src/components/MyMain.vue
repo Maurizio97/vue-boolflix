@@ -1,5 +1,6 @@
 <template>
   <main>
+    <!-- <FilmsCard/> -->
     <!-- film -->
     <div class="container-card" v-for="film in listFilm" :key="film.id">
       <div class="card">
@@ -27,7 +28,6 @@
         </div>
       </div>
     </div>
-    
     <!-- serie tv -->
     <!-- poster_path -->
     <div class="container-card" v-for="tv in listTv" :key="tv.id">
@@ -61,8 +61,12 @@
 <script>
 import {EventBus} from '@/EventBus.js'
 import Axios from 'axios'
+// import FilmsCard from './FilmCard.vue'
 export default {
   name: "MyMain",
+  // components: {
+  //   FilmsCard,
+  // },
   data() {
     return {
       listFilm: [],

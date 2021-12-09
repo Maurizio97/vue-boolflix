@@ -4,8 +4,7 @@
       BOOLFIX
     </h1>
     <nav>
-      <input type="text" placeholder="Search" v-model="query" />
-      <button @click.prevent="saveValueInBus()">Search</button>
+      <input type="text" placeholder="Search" v-model="query" @keypress.enter="saveValueInBus()"/>
     </nav>
   </header>
 </template>
@@ -23,6 +22,7 @@ export default {
   methods: {
     saveValueInBus(){
       EventBus.$emit('search', this.query )
+      this.query = ""
     }
   },
 };
