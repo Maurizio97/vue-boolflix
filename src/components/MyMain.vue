@@ -30,31 +30,31 @@
     
     <!-- serie tv -->
     <!-- poster_path -->
-    <!-- <div class="container-card" v-for="tv in listTv" :key="tv.id">
+    <div class="container-card" v-for="tv in listTv" :key="tv.id">
       <div class="card">
         <div class="cover">
           <img class="cover-img" v-if="tv.poster_path !== null" :src="coverUrl + tv.poster_path" :alt="tv.title" />
-          <img v-else class="cover-netflix" src="https://i.pinimg.com/564x/01/e1/35/01e135a5bcabe81ce279076de8dfbfd9.jpg" alt=""> -->
+          <img v-else class="cover-netflix" src="https://i.pinimg.com/564x/01/e1/35/01e135a5bcabe81ce279076de8dfbfd9.jpg" alt="">
           
           <!-- container info -->
-          <!-- <div class="container-info">
+          <div class="container-info">
             <div>Titolo: {{ tv.title }}</div>
             <div>Titolo Originale: {{ tv.original_title }}</div>
-            <div class="language">Lingua: <img :src="insertFlag(tv.original_language)" /></div> -->
+            <div class="language">Lingua: <img :src="insertFlag(tv.original_language)" /></div>
 
             <!-- contenitore del voto -->
-            <!-- <div>
+            <div>
               Voto:
               <span v-for="star, i in addStars(tv)" :key="i">
                 <i class="star" :class="star"></i>
               </span>
-            </div> -->
+            </div>
             <!-- //contenitore del voto -->
-          <!-- </div>
+          </div>
 
         </div>
       </div>
-    </div> -->
+    </div>
   </main>
 </template>
 

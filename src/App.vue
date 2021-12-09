@@ -1,10 +1,10 @@
 <template>
   <div id="app">
     <div id="bg-header">
-      <MyHeader @searchFilm="saveArrayFilms" @searchTv="saveArrayTv"/>
+      <MyHeader @search="saveValue"/>
     </div>
     <div id="bg-main">
-      <MyMain :listFilm="ArrayFilmsFromSearch" :listTv="ArrayTvFromSearch"/>    
+      <MyMain :query="valueForSearch"/>    
     </div>
   </div>
 </template>
@@ -21,19 +21,14 @@ export default {
   },
   data(){
     return {
-      ArrayFilmsFromSearch: [],
-      ArrayTvFromSearch: [],
+      valueForSearch: null,
     }
   },
   methods: {
-    saveArrayFilms(val){
-      this.ArrayFilmsFromSearch = val
-      console.log("array dall'header film",this.ArrayFilmsFromSearch);
+    saveValue(val){
+      this.valueForSearch = val
+      console.log("il valore che mi torna l'header:",this.valueForSearch);
     },
-    saveArrayTv(val){
-      this.ArrayTvFromSearch = val
-      console.log("array dall'header tv",this.ArrayTvFromSearch);
-    }
   }
 }
 </script>
