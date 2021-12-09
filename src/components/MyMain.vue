@@ -63,9 +63,6 @@ import {EventBus} from '@/EventBus.js'
 import Axios from 'axios'
 export default {
   name: "MyMain",
-  props: {
-    // query:String
-  },
   data() {
     return {
       listFilm: [],
@@ -93,7 +90,6 @@ export default {
         // this.$emit("searchFilm", this.listFilm);
       });
 
-      // https://api.themoviedb.org/3/search/tv?api_key=bd6af5f27de039c66efea1f8e2b13067&language=en-US&page=1&include_adult=false
       // chiamata axios che mi torna i le serie tv
       Axios.get(`${this.apiUrlTv}&query=${queryFromSearch}`).then((res) => {
         this.listTv = res.data.results;

@@ -1,10 +1,10 @@
 <template>
   <div id="app">
     <div id="bg-header">
-      <MyHeader @search="saveValue"/>
+      <MyHeader/>
     </div>
     <div id="bg-main">
-      <MyMain :query="valueForSearch"/>    
+      <MyMain/>    
     </div>
   </div>
 </template>
@@ -19,17 +19,6 @@ export default {
     MyHeader,
     MyMain
   },
-  data(){
-    return {
-      valueForSearch: null,
-    }
-  },
-  methods: {
-    saveValue(val){
-      this.valueForSearch = val
-      console.log("il valore che mi torna l'header:",this.valueForSearch);
-    },
-  }
 }
 </script>
 
