@@ -27,53 +27,81 @@
         </div>
       </div>
     </div>
+    
     <!-- serie tv -->
     <!-- poster_path -->
-    <div class="container-card" v-for="tv in listTv" :key="tv.id">
+    <!-- <div class="container-card" v-for="tv in listTv" :key="tv.id">
       <div class="card">
         <div class="cover">
           <img class="cover-img" v-if="tv.poster_path !== null" :src="coverUrl + tv.poster_path" :alt="tv.title" />
-          <img v-else class="cover-netflix" src="https://i.pinimg.com/564x/01/e1/35/01e135a5bcabe81ce279076de8dfbfd9.jpg" alt="">
+          <img v-else class="cover-netflix" src="https://i.pinimg.com/564x/01/e1/35/01e135a5bcabe81ce279076de8dfbfd9.jpg" alt=""> -->
           
           <!-- container info -->
-          <div class="container-info">
+          <!-- <div class="container-info">
             <div>Titolo: {{ tv.title }}</div>
             <div>Titolo Originale: {{ tv.original_title }}</div>
-            <div class="language">Lingua: <img :src="insertFlag(tv.original_language)" /></div>
+            <div class="language">Lingua: <img :src="insertFlag(tv.original_language)" /></div> -->
 
             <!-- contenitore del voto -->
-            <div>
+            <!-- <div>
               Voto:
               <span v-for="star, i in addStars(tv)" :key="i">
                 <i class="star" :class="star"></i>
               </span>
-            </div>
+            </div> -->
             <!-- //contenitore del voto -->
-          </div>
+          <!-- </div>
 
         </div>
       </div>
-    </div>
+    </div> -->
   </main>
 </template>
 
 <script>
-// import Axios from 'axios'
+import {EventBus} from '@/EventBus.js'
+import Axios from 'axios'
 export default {
   name: "MyMain",
   props: {
-    listFilm: Array,
-    listTv: Array,
+    // query:String
   },
   data() {
     return {
+      listFilm: [],
+      listTv: [],
+      apiUrlFilm:
+        "https://api.themoviedb.org/3/search/movie?api_key=bd6af5f27de039c66efea1f8e2b13067&language=en-US&page=1&include_adult=false",
+      apiUrlTv: 
+        "https://api.themoviedb.org/3/search/tv?api_key=bd6af5f27de039c66efea1f8e2b13067&language=en-US&page=1&include_adult=false",
       itFlag: require("@/assets/it_flag.png"),
       enFlag: require("@/assets/en_flag.png"),
       frFlag: require("@/assets/fr_flag.png"),
       coverUrl: "http://image.tmdb.org/t/p/w342",
     };
   },
+  created(){
+    EventBus.$on('search', this.getArray)
+  },
   methods: {
+    // funzione che mi ritorna l'array di film e serie tv
+    getArray(queryFromSearch) {
+      // chiamata axios che mi torna i film
+      Axios.get(`${this.apiUrlFilm}&query=${queryFromSearch}`).then((res) => {
+        this.listFilm = res.data.results;
+        console.log("axios mi torna questi film:", this.listFilm);
+        // this.$emit("searchFilm", this.listFilm);
+      });
+
+      // https://api.themoviedb.org/3/search/tv?api_key=bd6af5f27de039c66efea1f8e2b13067&language=en-US&page=1&include_adult=false
+      // chiamata axios che mi torna i le serie tv
+      Axios.get(`${this.apiUrlTv}&query=${queryFromSearch}`).then((res) => {
+        this.listTv = res.data.results;
+        console.log("axios mi torna queste serie tv:", this.listTv);
+        // this.$emit("searchTv", this.listTv);
+      });
+    },
+
     // funzione per aggiungere le bandiere
     insertFlag(item) {
       if (item === "it") {
