@@ -48,7 +48,7 @@ export default {
   computed: {
       object(){
           if(this.objectFilm){
-              return this.objectFilm
+            return this.objectFilm
           } 
           return this.objectTv
       }
