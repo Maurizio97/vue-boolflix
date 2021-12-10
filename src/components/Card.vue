@@ -38,7 +38,6 @@ export default {
   },
   data() {
       return {
-        item: {},
         itFlag: require("@/assets/it_flag.png"),
         enFlag: require("@/assets/en_flag.png"),
         frFlag: require("@/assets/fr_flag.png"),
