@@ -45,7 +45,6 @@ export default {
       // chiamata axios che mi torna i film
       Axios.get(`${this.apiUrlFilm}&query=${queryFromSearch}`).then((res) => {
         const arrCallFilm = res.data.results;
-        console.log("axios mi torna questi film:", arrCallFilm);
         this.getCastFilm(arrCallFilm);
       });
 
@@ -56,38 +55,26 @@ export default {
         this.getCastTv(arrCallTv);
       });
     },
-    
-    // async getCast(arr){
 
-    //   const listId = arr.map(film => film.id);
-    //   console.log(listId);
-    //   console.log("lista id",listId);
-    //   for( let id of listId){
-    //     console.log("log for",id);
-    //     const res = await Axios.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=bd6af5f27de039c66efea1f8e2b13067&language=en-US`)
-    //       this.listCast.push(res.data.cast); 
-    //   }
-    //     console.log(this.listCast);
-    // },
-
-    // funzione che mi aggiunge un array contente il cast (proveniente da una chiamata axios) all'array principale
+    // funzione che mi aggiunge un array contente il cast (proveniente da una chiamata axios) e crea l'array principale nei data (film)
     async getCastFilm(arr){
       for( let object of arr){
-        console.log("log for",object.id);
         const res = await Axios.get(`https://api.themoviedb.org/3/movie/${object.id}/credits?api_key=bd6af5f27de039c66efea1f8e2b13067&language=en-US`)
           object.cast = res.data.cast;
       }
       this.listFilm = arr
-        console.log("after call",this.listFilm);
+        console.log("axios mi torna questi film (agg):", this.listFilm);
+
     },
+
+    // funzione che mi aggiunge un array contente il cast (proveniente da una chiamata axios) e crea l'array principale nei data (tv)
     async getCastTv(arr){
       for( let object of arr){
-        console.log("log for",object.id);
         const res = await Axios.get(`https://api.themoviedb.org/3/tv/${object.id}/credits?api_key=bd6af5f27de039c66efea1f8e2b13067&language=en-US`)
           object.cast = res.data.cast;
       }
       this.listTv = arr
-      console.log("after call",this.listTv);
+
     },
   }
 };

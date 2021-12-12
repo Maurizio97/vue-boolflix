@@ -12,6 +12,7 @@
             <div>Titolo: {{ object.title? object.title: object.name }}</div>
             <div>Titolo Originale: {{ object.original_title? object.original_title: object.original_name }}</div>
             <div class="language">Lingua: <img :src="insertFlag(object.original_language)" /></div>
+            <!-- qui stampo il cast -->
             <div>
               Cast: 
               <span v-for="item,i in object.cast" :key="i">
@@ -56,6 +57,7 @@ export default {
         } 
         return this.objectTv;
     },
+    
   },
   methods: {
     // funzione per aggiungere le bandiere
