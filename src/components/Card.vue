@@ -12,7 +12,12 @@
             <div>Titolo: {{ object.title? object.title: object.name }}</div>
             <div>Titolo Originale: {{ object.original_title? object.original_title: object.original_name }}</div>
             <div class="language">Lingua: <img :src="insertFlag(object.original_language)" /></div>
-            <!-- <div v-for="cast,i in getCast(id)" :key="i">Cast: {{ cast.name }} </div> -->
+            <div>
+              Cast: 
+              <span v-for="item,i in object.cast" :key="i">
+                {{ item.name }},
+              </span> 
+            </div>
             <!-- contenitore del voto -->
             <div>
               Voto:
@@ -30,15 +35,11 @@
 </template>
 
 <script>
-import Axios from 'axios'
-
-
 export default {
   name: 'Card',
   props: {
     objectFilm:Object,
     objectTv:Object,
-    // id:Number
   },
   data() {
       return {
@@ -46,28 +47,17 @@ export default {
         enFlag: require("@/assets/en_flag.png"),
         frFlag: require("@/assets/fr_flag.png"),
         coverUrl: "http://image.tmdb.org/t/p/w342",
-        // apiCast: 
-        //   "https://api.themoviedb.org/3/movie/112679/credits?api_key=bd6af5f27de039c66efea1f8e2b13067&language=en-US",
       }
-  },
-  updated(){
-    console.log("ciao");
   },
   computed: {
-      object(){
-          if(this.objectFilm){
-            return this.objectFilm;
-          } 
-          return this.objectTv;
-      }
+    object(){
+        if(this.objectFilm){
+          return this.objectFilm;
+        } 
+        return this.objectTv;
+    },
   },
   methods: {
-      // funzione per chiamata ad api (cast)
-      getCast(val){
-      Axios.get(`https://api.themoviedb.org/3/movie/${val}/credits?api_key=bd6af5f27de039c66efea1f8e2b13067&language=en-US`).then((res) => {
-        return res.data.cast;
-      });
-    },
     // funzione per aggiungere le bandiere
     insertFlag(item) {
       if (item === "it") {
@@ -80,7 +70,6 @@ export default {
         return "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvUgkbNyXbD7bXamCmiGz2ZBAVbyaU_fvARQ&usqp=CAU";
       }
     },
-
     // funzione per aggiungere le stelle
     addStars(item){
       let arrayStar = [];
@@ -92,7 +81,7 @@ export default {
         }
       }
         return arrayStar
-    }
+    } 
   },
 }
 </script>
