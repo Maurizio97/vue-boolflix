@@ -9,7 +9,6 @@
 
 <script>
 import { EventBus } from "@/EventBus.js";
-// import Axios from "axios";
 export default {
   name: "MyHeader",
   data() {

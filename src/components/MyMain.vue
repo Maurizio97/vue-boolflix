@@ -37,7 +37,7 @@ export default {
     };
   },
   created(){
-    EventBus.$on('search', this.getArray)
+    EventBus.$on('search', this.getArray);
   },
   methods: {
     // funzione che mi ritorna l'array di film e serie tv
@@ -46,21 +46,42 @@ export default {
       Axios.get(`${this.apiUrlFilm}&query=${queryFromSearch}`).then((res) => {
         this.listFilm = res.data.results;
         console.log("axios mi torna questi film:", this.listFilm);
-        // this.$emit("searchFilm", this.listFilm);
+        this.getCastFilm(this.listFilm);
       });
 
       // chiamata axios che mi torna i le serie tv
       Axios.get(`${this.apiUrlTv}&query=${queryFromSearch}`).then((res) => {
         this.listTv = res.data.results;
         console.log("axios mi torna queste serie tv:", this.listTv);
-        // this.$emit("searchTv", this.listTv);
       });
     },
-  },
+    
+    // async getCast(arr){
+
+    //   const listId = arr.map(film => film.id);
+    //   console.log(listId);
+    //   console.log("lista id",listId);
+    //   for( let id of listId){
+    //     console.log("log for",id);
+    //     const res = await Axios.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=bd6af5f27de039c66efea1f8e2b13067&language=en-US`)
+    //       this.listCast.push(res.data.cast); 
+    //   }
+    //     console.log(this.listCast);
+    // },
+
+    // funzione che mi aggiunge un array contente il cast (proveniente da una chiamata axios) all'array principale
+    async getCastFilm(arr){
+      for( let object of arr){
+        console.log("log for",object.id);
+        const res = await Axios.get(`https://api.themoviedb.org/3/movie/${object.id}/credits?api_key=bd6af5f27de039c66efea1f8e2b13067&language=en-US`)
+          object.cast = res.data.cast;
+      }
+        console.log("after call",this.listFilm);
+    },
+  }
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
 main {
   display: flex;

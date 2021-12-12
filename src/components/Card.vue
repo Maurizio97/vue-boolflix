@@ -5,14 +5,14 @@
       <div class="card">
         <div class="cover">
           <img v-if="object.poster_path !== null" :src="coverUrl + object.poster_path" :alt="object.title" />
-          <img v-else class="cover-netflix" src="https://i.pinimg.com/564x/01/e1/35/01e135a5bcabe81ce279076de8dfbfd9.jpg" alt="">
+          <img v-else class="cover-netflix" src="https://i.pinimg.com/564x/01/e1/35/01e135a5bcabe81ce279076de8dfbfd9.jpg" alt="cover standard">
           
           <!-- container info -->
           <div class="container-info">
             <div>Titolo: {{ object.title? object.title: object.name }}</div>
             <div>Titolo Originale: {{ object.original_title? object.original_title: object.original_name }}</div>
             <div class="language">Lingua: <img :src="insertFlag(object.original_language)" /></div>
-
+            <!-- <div v-for="cast,i in getCast(id)" :key="i">Cast: {{ cast.name }} </div> -->
             <!-- contenitore del voto -->
             <div>
               Voto:
@@ -30,11 +30,15 @@
 </template>
 
 <script>
+import Axios from 'axios'
+
+
 export default {
   name: 'Card',
   props: {
     objectFilm:Object,
-    objectTv:Object
+    objectTv:Object,
+    // id:Number
   },
   data() {
       return {
@@ -42,17 +46,28 @@ export default {
         enFlag: require("@/assets/en_flag.png"),
         frFlag: require("@/assets/fr_flag.png"),
         coverUrl: "http://image.tmdb.org/t/p/w342",
+        // apiCast: 
+        //   "https://api.themoviedb.org/3/movie/112679/credits?api_key=bd6af5f27de039c66efea1f8e2b13067&language=en-US",
       }
+  },
+  updated(){
+    console.log("ciao");
   },
   computed: {
       object(){
           if(this.objectFilm){
-            return this.objectFilm
+            return this.objectFilm;
           } 
-          return this.objectTv
+          return this.objectTv;
       }
   },
   methods: {
+      // funzione per chiamata ad api (cast)
+      getCast(val){
+      Axios.get(`https://api.themoviedb.org/3/movie/${val}/credits?api_key=bd6af5f27de039c66efea1f8e2b13067&language=en-US`).then((res) => {
+        return res.data.cast;
+      });
+    },
     // funzione per aggiungere le bandiere
     insertFlag(item) {
       if (item === "it") {
@@ -65,6 +80,8 @@ export default {
         return "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvUgkbNyXbD7bXamCmiGz2ZBAVbyaU_fvARQ&usqp=CAU";
       }
     },
+
+    // funzione per aggiungere le stelle
     addStars(item){
       let arrayStar = [];
       for (let i = 0; i < 5; i++){
