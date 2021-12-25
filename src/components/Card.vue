@@ -15,7 +15,7 @@
             <!-- qui stampo il cast -->
             <div>
               Cast: 
-              <span v-for="item,i in object.cast" :key="i">
+              <span v-for="item,i in object.cast.slice(0, 5)" :key="i">
                 {{ item.name }},
               </span> 
             </div>
